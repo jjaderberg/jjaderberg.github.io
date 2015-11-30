@@ -737,7 +737,6 @@ h2 { color: #325D72; border-bottom: 1px solid #dddddd; }
 <link href="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.9.0/theme/neo.min.css" rel="stylesheet">
 <script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.9.0/codemirror.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.9.0/addon/runmode/runmode.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.9.0/addon/mode/loadmode.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.9.0/mode/javascript/javascript.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.9.0/mode/shell/shell.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.9.0/mode/python/python.min.js"></script>
@@ -878,35 +877,21 @@ $(document).ready(function() {
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#first-example">First Example</a></li>
-<li><a href="#driver">Driver</a>
-<ul class="sectlevel2">
-<li><a href="#configuration">Configuration</a></li>
-<li><a href="#construction">Construction</a></li>
-<li><a href="#dependencies">Dependencies</a></li>
-<li><a href="#lifecycle">Lifecycle</a></li>
-<li><a href="#ssl-tls">SSL / TLS</a></li>
-<li><a href="#url-format">URL Format</a></li>
-<li><a href="#version-mapping-table">Version Mapping Table</a></li>
-<li><a href="#websockets">Websockets</a></li>
-</ul>
-</li>
-<li><a href="#errors">Errors</a></li>
 <li><a href="#getting-started">Getting Started</a>
 <ul class="sectlevel2">
-<li><a href="#download">Download</a></li>
-<li><a href="#setup">Setup</a></li>
-<li><a href="#versioning">Versioning</a></li>
+<li><a href="#get-the-driver">Get the driver</a></li>
+<li><a href="#use-the-driver">Use the driver</a></li>
 </ul>
 </li>
-<li><a href="#results">Results</a>
+<li><a href="#driver">Driver</a>
 <ul class="sectlevel2">
-<li><a href="#concepts">Concepts</a></li>
-<li><a href="#introspection">Introspection</a></li>
-<li><a href="#iteration">Iteration</a></li>
-<li><a href="#plan-and-profile">Plan + Profile</a></li>
-<li><a href="#reading-records">Reading Records</a></li>
-<li><a href="#utility-methods">Utility Methods</a></li>
+<li><a href="#dependencies">Dependencies</a></li>
+<li><a href="#construction">Construction</a></li>
+<li><a href="#lifecycle">Lifecycle</a></li>
+<li><a href="#url-format">URL Format</a></li>
+<li><a href="#configuration">Configuration</a></li>
+<li><a href="#ssl-tls">SSL / TLS</a></li>
+<li><a href="#websockets">Websockets</a></li>
 </ul>
 </li>
 <li><a href="#session">Session</a>
@@ -925,27 +910,141 @@ $(document).ready(function() {
 <li><a href="#transactions-nested-transactions">Nested Transactions</a></li>
 </ul>
 </li>
-<li><a href="#type-mapping">Type Mapping</a></li>
+<li><a href="#result">Result</a>
+<ul class="sectlevel2">
+<li><a href="#concepts">Concepts</a></li>
+<li><a href="#processing">Processing</a></li>
+<li><a href="#plan-and-profile">Plan + Profile</a></li>
+</ul>
+</li>
+<li><a href="#types">Types</a></li>
+<li><a href="#errors">Errors</a></li>
+<li><a href="#terminology">Terminology</a></li>
 </ul>
 </div>
 </div>
 <div id="content">
-<div class="sect1">
-<h2 id="first-example"><a class="anchor" href="#first-example"></a>First Example</h2>
+<div id="preamble">
 <div class="sectionbody">
+<div class="paragraph">
+<p>The Uniform Language Drivers are Drivers for the <a href="http://neo4j.com/">Neo4j Database</a>
+  that use the <a href="#term-bolt"><code>Bolt</code></a> protocol.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="getting-started"><a class="anchor" href="#getting-started"></a>Getting Started</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To help you get up and running quickly.</p>
+</div>
+<div class="sect2">
+<h3 id="get-the-driver"><a class="anchor" href="#get-the-driver"></a>Get the driver</h3>
+<div class="paragraph">
+<p>You can download the driver source or acquire it with one of the dependency managers of your language.</p>
+</div>
+<div class="sect3">
+<h4 id="versions"><a class="anchor" href="#versions"></a>Versions</h4>
+<div class="paragraph">
+<p>Each version of a Driver supports up to four different versions of the Bolt protocol.
+This means, that for immediate future each driver version will work with all available version of the protocol.
+Once we start seeing Drivers that no longer support older versions of Bolt,
+  we will make this information available here as an accessible overview.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_download"><a class="anchor" href="#_download"></a>Download</h4>
+<div class="paragraph">
+<p>To dowload the driver do</p>
+</div>
 <div class="exampleblock tabbed-example">
-<div class="title">Example 1. Foo bar example</div>
+<div class="title">Example 1. Download</div>
 <div class="content">
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-python" data-lang="python">def test_can_run_simple_statement_from_bytes_string(self):
-    session = GraphDatabase.driver("bolt://localhost").session()
-    count = 0
-    for record in session.run(b"RETURN 1 AS n"):
-        assert record[0] == 1
-        assert record["n"] == 1
-        assert record.n == 1
-        assert repr(record)</code></pre>
+<pre class="highlight"><code class="language-cs" data-lang="cs">COMING SOON</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">&lt;dependencies&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.neo4j.driver&lt;/groupId&gt;
+        &lt;artifactId&gt;neo4j-java-driver&lt;/artifactId&gt;
+        &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+    &lt;/dependency&gt;
+&lt;/dependencies&gt;
+
+&lt;repositories&gt;
+    &lt;repository&gt;
+        &lt;id&gt;neo4j-snapshot-repository&lt;/id&gt;
+        &lt;name&gt;Neo4j Maven 2 snapshot repository&lt;/name&gt;
+        &lt;url&gt;http://m2.neo4j.org/content/repositories/snapshots&lt;/url&gt;
+        &lt;snapshots&gt;
+            &lt;enabled&gt;true&lt;/enabled&gt;
+        &lt;/snapshots&gt;
+        &lt;releases&gt;
+            &lt;enabled&gt;false&lt;/enabled&gt;
+        &lt;/releases&gt;
+    &lt;/repository&gt;
+&lt;/repositories&gt;</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-javascript" data-lang="javascript">var neo4j = require('lib/neo4j');</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-python" data-lang="python">pip install neo4j-driver</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="use-the-driver"><a class="anchor" href="#use-the-driver"></a>Use the driver</h3>
+<div class="paragraph">
+<p>Each driver has a database object for creating a driver.
+To use a driver, follow the simple pattern:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Ask the database object for a new driver.</p>
+</li>
+<li>
+<p>Ask the driver object for a new session.</p>
+</li>
+<li>
+<p>Use the session object to run statements.
+It returns an object representing the results.</p>
+</li>
+<li>
+<p>Process the results.</p>
+</li>
+</ol>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Remember to exhaust the returned results so that the session is ready to run the next statement!
+</td>
+</tr>
+</table>
+</div>
+<div class="exampleblock tabbed-example">
+<div class="title">Example 2. Usage example</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-cs" data-lang="cs">COMING SOON</code></pre>
 </div>
 </div>
 <div class="listingblock">
@@ -1017,6 +1116,28 @@ promiseResult.then(function(records) {
 });</code></pre>
 </div>
 </div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-python" data-lang="python">def test_can_run_simple_statement_from_bytes_string(self):
+    session = GraphDatabase.driver("bolt://localhost").session()
+    count = 0
+    for record in session.run(b"RETURN 1 AS n"):
+        assert record[0] == 1
+        assert record["n"] == 1
+        assert record.n == 1
+        assert repr(record)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>As seen above, it is possible to run statements directly from the session object.
+The session will take care of opening and closing the transaction.
+The session also provides the opportunity for a user to manage the transaction.
+When explicitly told to begin a new transaction,
+  the session will return the transaction object,
+  allowing fine-grained transaction control.
+See the <a href="#transactions">transaction section</a> for details.</p>
 </div>
 </div>
 </div>
@@ -1024,388 +1145,317 @@ promiseResult.then(function(records) {
 <div class="sect1">
 <h2 id="driver"><a class="anchor" href="#driver"></a>Driver</h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p>Some may argue that the opposite of Uniform Drivers is Casual Drivers, or even Naked Drivers.
-This is of course preposterous.
-The opposite and complement of Uniform Drivers is Uniform Passengers,
-  as should be obvious to anyone upon serious reflection.
-A valiant case has been made by the Dry Cleaner&#8217;s guild that,
-  as two negatives cancel out,
-  the true opposite is Iform Drivers.
-Needless to say, this frivolous play on words was uniformly frowned upon by the rest of the community.</p>
-</div>
-<div class="sect2">
-<h3 id="configuration"><a class="anchor" href="#configuration"></a>Configuration</h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>an arrangement of parts or elements in a particular form, figure, or combination:
-<em>the unrepeatable configuration of the stars at the moment of your birth</em> | <em>the broad configuration of the economy remains capitalist.</em></p>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
 <div class="ulist">
 <ul>
 <li>
-<p><code>Computing</code> the arrangement or set-up of the hardware and software that make up a computer system.
-<em>the PC comes with a removable hard disk drive as part of the standard configuration.</em></p>
+<p>remove 'your'</p>
 </li>
 <li>
-<p><code>Chemistry</code> the fixed three-dimensional relationship of the atoms in a molecule, defined by the bonds between them.
-Compare with CONFORMATION.</p>
+<p>don&#8217;t talk about code here, this is conceptual</p>
 </li>
 </ul>
 </div>
-</li>
-<li>
-<p><code>Psychology</code> another term for GESTALT.</p>
-</li>
-</ol>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The <code>Driver</code> is your primary object of interest.
+It usually lives for the duration of your application,
+  and from it you create <code>Session</code> to use for executing statements on the database.</p>
+</div>
+<div class="sect2">
+<h3 id="dependencies"><a class="anchor" href="#dependencies"></a>Dependencies</h3>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Do we have anything more to say about dependencies that we haven&#8217;t said in the getting started section?</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="exampleblock tabbed-example">
+<div class="title">Example 3. Importing dependencies</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-cs" data-lang="cs">COMING SOON</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">String text = "MATCH (n) RETURN n";
+
+// when
+Statement statement = new Statement( text, NO_PARAMETERS );</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-javascript" data-lang="javascript">var neo4j = require('neo4j');
+
+var statement = ['MERGE (alice:Person {name:{name_a},age:{age_a}})',
+  'MERGE (bob:Person {name:{name_b},age:{age_b}})',
+  'CREATE UNIQUE (alice)-[alice_knows_bob:KNOWS]-&gt;(bob)',
+  'RETURN alice, bob, alice_knows_bob'
+];
+
+var params = {
+  name_a: 'Alice',
+  age_a: 33,
+  name_b: 'Bob',
+  age_b: 44
+};
+
+var driver = neo4j.driver("bolt://localhost");
+
+var streamSession = driver.session();
+var streamResult = streamSession.run(statement.join(' '), params);
+streamResult.subscribe({
+  onNext: function(record) {
+    // On receipt of RECORD
+    for(var i in record) {
+      console.log(i);
+      console.log(record[i]);
+    }
+  }, onCompleted: function() {
+    var summary = streamResult.summarize();
+    //Print number of nodes created
+    console.log('');
+    console.log(summary.updateStatistics.nodesCreated());
+    streamSession.close();
+  }, onError: function(error) {
+    console.log(error);
+  }
+});
+
+var promiseSession = driver.session();
+var promiseResult = promiseSession.run(statement.join(' '), params);
+promiseResult.then(function(records) {
+  records.forEach(function(record) {
+    for(var i in record) {
+      console.log(i);
+      console.log(record[i]);
+    }
+  });
+  var summary = promiseResult.summarize();
+  //Print number of nodes created
+  console.log('');
+  console.log(summary.updateStatistics.nodesCreated());
+})
+.catch(function(error) {
+  console.log(error);
+})
+.then(function(){
+  promiseSession.close();
+});</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-python" data-lang="python">def test_can_run_simple_statement_from_bytes_string(self):
+    session = GraphDatabase.driver("bolt://localhost").session()
+    count = 0
+    for record in session.run(b"RETURN 1 AS n"):
+        assert record[0] == 1
+        assert record["n"] == 1
+        assert record.n == 1
+        assert repr(record)</code></pre>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="construction"><a class="anchor" href="#construction"></a>Construction</h3>
-<div class="verseblock">
-<pre class="content">His accent serenades me and presses at the door
-Broken promise to be around for my mind war
-And my accomplishment&#8217;s interrogating me
-Today&#8217;s become tomorrow before I wanted it to be
-And desperate discussions
-The start of the destruction
-Our sign, in my mind
-I&#8217;ll be fine
-I&#8217;ll be fine
-
-'Cause I&#8217;m under construction everyone
-So you&#8217;ll have to mind the mess
-I&#8217;m under some construction
-
-I always had to try harder, I never really could keep up
-Sitting in the corner with my illness and bad luck
-But in this humble place I&#8217;m feeling like red wine
-And I hope to get better with some time
-I&#8217;ll be fine
-With some time
-I&#8217;ll be fine
-
-'Cause I&#8217;m under construction everyone
-So you&#8217;ll have to mind the mess
-I&#8217;m under some construction
-
-Construction
-Modification
-Motivation
-Of construction
-
-And the rituals that soothe and disgust me will be gone
-With some time
-I&#8217;ll be fine
-With some time
-I&#8217;ll be fine
-I&#8217;ll be fine
-
-I&#8217;m under construction everyone
-So you&#8217;ll have to mind the mess
-I&#8217;m under some construction
-I&#8217;m under construction everyone
-So you&#8217;ll have to mind the mess
-I&#8217;m under some construction
-Under construction
-Construction
-Feel better with some construction</pre>
-<div class="attribution">
-&#8212; No Doubt<br>
-<cite>Construction Deconstruction @ Everything In Time</cite>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="dependencies"><a class="anchor" href="#dependencies"></a>Dependencies</h3>
 <div class="paragraph">
-<p>Please import them.
-Also, include them.</p>
+<p>A Driver object is created from a graph database singleton.</p>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Do we have anything more to say about dependencies that we haven&#8217;t said in the getting started section?</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="exampleblock tabbed-example">
+<div class="title">Example 4. Creating a Driver object</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-cs" data-lang="cs">COMING SOON</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">String text = "MATCH (n) RETURN n";
+
+// when
+Statement statement = new Statement( text, NO_PARAMETERS );</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-javascript" data-lang="javascript">var neo4j = require('neo4j');
+
+var statement = ['MERGE (alice:Person {name:{name_a},age:{age_a}})',
+  'MERGE (bob:Person {name:{name_b},age:{age_b}})',
+  'CREATE UNIQUE (alice)-[alice_knows_bob:KNOWS]-&gt;(bob)',
+  'RETURN alice, bob, alice_knows_bob'
+];
+
+var params = {
+  name_a: 'Alice',
+  age_a: 33,
+  name_b: 'Bob',
+  age_b: 44
+};
+
+var driver = neo4j.driver("bolt://localhost");
+
+var streamSession = driver.session();
+var streamResult = streamSession.run(statement.join(' '), params);
+streamResult.subscribe({
+  onNext: function(record) {
+    // On receipt of RECORD
+    for(var i in record) {
+      console.log(i);
+      console.log(record[i]);
+    }
+  }, onCompleted: function() {
+    var summary = streamResult.summarize();
+    //Print number of nodes created
+    console.log('');
+    console.log(summary.updateStatistics.nodesCreated());
+    streamSession.close();
+  }, onError: function(error) {
+    console.log(error);
+  }
+});
+
+var promiseSession = driver.session();
+var promiseResult = promiseSession.run(statement.join(' '), params);
+promiseResult.then(function(records) {
+  records.forEach(function(record) {
+    for(var i in record) {
+      console.log(i);
+      console.log(record[i]);
+    }
+  });
+  var summary = promiseResult.summarize();
+  //Print number of nodes created
+  console.log('');
+  console.log(summary.updateStatistics.nodesCreated());
+})
+.catch(function(error) {
+  console.log(error);
+})
+.then(function(){
+  promiseSession.close();
+});</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-python" data-lang="python">def test_can_run_simple_statement_from_bytes_string(self):
+    session = GraphDatabase.driver("bolt://localhost").session()
+    count = 0
+    for record in session.run(b"RETURN 1 AS n"):
+        assert record[0] == 1
+        assert record["n"] == 1
+        assert record.n == 1
+        assert repr(record)</code></pre>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="lifecycle"><a class="anchor" href="#lifecycle"></a>Lifecycle</h3>
-<div class="literalblock">
-<div class="content">
-<pre>usage: mvn [options] [&lt;goal(s)&gt;] [&lt;phase(s)&gt;]
-
-Options:
- -am,--also-make                        If project list is specified, also
-                                        build projects required by the
-                                        list
- -amd,--also-make-dependents            If project list is specified, also
-                                        build projects that depend on
-                                        projects on the list
- -B,--batch-mode                        Run in non-interactive (batch)
-                                        mode
- -b,--builder &lt;arg&gt;                     The id of the build strategy to
-                                        use.
- -C,--strict-checksums                  Fail the build if checksums don't
-                                        match
- -c,--lax-checksums                     Warn if checksums don't match
- -cpu,--check-plugin-updates            Ineffective, only kept for
-                                        backward compatibility
- -D,--define &lt;arg&gt;                      Define a system property
- -e,--errors                            Produce execution error messages
- -emp,--encrypt-master-password &lt;arg&gt;   Encrypt master security password
- -ep,--encrypt-password &lt;arg&gt;           Encrypt server password
- -f,--file &lt;arg&gt;                        Force the use of an alternate POM
-                                        file (or directory with pom.xml).
- -fae,--fail-at-end                     Only fail the build afterwards;
-                                        allow all non-impacted builds to
-                                        continue
- -ff,--fail-fast                        Stop at first failure in
-                                        reactorized builds
- -fn,--fail-never                       NEVER fail the build, regardless
-                                        of project result
- -gs,--global-settings &lt;arg&gt;            Alternate path for the global
-                                        settings file
- -gt,--global-toolchains &lt;arg&gt;          Alternate path for the global
-                                        toolchains file
- -h,--help                              Display help information
- -l,--log-file &lt;arg&gt;                    Log file to where all build output
-                                        will go.
- -llr,--legacy-local-repository         Use Maven 2 Legacy Local
-                                        Repository behaviour, ie no use of
-                                        _remote.repositories. Can also be
-                                        activated by using
-                                        -Dmaven.legacyLocalRepo=true
- -N,--non-recursive                     Do not recurse into sub-projects
- -npr,--no-plugin-registry              Ineffective, only kept for
-                                        backward compatibility
- -npu,--no-plugin-updates               Ineffective, only kept for
-                                        backward compatibility
- -nsu,--no-snapshot-updates             Suppress SNAPSHOT updates
- -o,--offline                           Work offline
- -P,--activate-profiles &lt;arg&gt;           Comma-delimited list of profiles
-                                        to activate
- -pl,--projects &lt;arg&gt;                   Comma-delimited list of specified
-                                        reactor projects to build instead
-                                        of all projects. A project can be
-                                        specified by [groupId]:artifactId
-                                        or by its relative path.
- -q,--quiet                             Quiet output - only show errors
- -rf,--resume-from &lt;arg&gt;                Resume reactor from specified
-                                        project
- -s,--settings &lt;arg&gt;                    Alternate path for the user
-                                        settings file
- -T,--threads &lt;arg&gt;                     Thread count, for instance 2.0C
-                                        where C is core multiplied
- -t,--toolchains &lt;arg&gt;                  Alternate path for the user
-                                        toolchains file
- -U,--update-snapshots                  Forces a check for missing
-                                        releases and updated snapshots on
-                                        remote repositories
- -up,--update-plugins                   Ineffective, only kept for
-                                        backward compatibility
- -V,--show-version                      Display version information
-                                        WITHOUT stopping build
- -v,--version                           Display version information
- -X,--debug                             Produce execution debug output</pre>
+<div class="paragraph">
+<p>A <code>Driver</code> object can be created from your database object.
+It typically lives for the duration of your application.
+Use a <code>Driver</code> to create `Session`s.</p>
 </div>
+<div class="paragraph">
+<p>The only reason to create more than one driver would be
+  if you have multiple destinations/URLs to create sessions for.
+(For HA purposes, or pulling data out of one database and pushing into another.)</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="url-format"><a class="anchor" href="#url-format"></a>URL Format</h3>
+<div class="paragraph">
+<p>The URL for a Bolt Driver follows normal URL patterns, with <code>scheme://hostname</code>.
+The scheme is <code>bolt</code>, so a valid URL could be <code>bolt://host.domain</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="configuration"><a class="anchor" href="#configuration"></a>Configuration</h3>
+<div class="paragraph">
+<p>(N/A, how to configure your Driver based on your server configuration.)</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="ssl-tls"><a class="anchor" href="#ssl-tls"></a>SSL / TLS</h3>
 <div class="paragraph">
-<p>Is it secret, is it safe?</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="url-format"><a class="anchor" href="#url-format"></a>URL Format</h3>
-<div class="literalblock">
-<div class="content">
-<pre>$url = trim($url, '!"#$%&amp;\'()*+,-./@:;&lt;=&gt;[\\]^_`{|}~');</pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="version-mapping-table"><a class="anchor" href="#version-mapping-table"></a>Version Mapping Table</h3>
-<div class="paragraph">
-<p>Let&#8217;s map all the version tables.</p>
+<p>Traffic using the Uniform Language Drivers is encrypted by default,
+  using SSL/TLS.
+If you want unencrpyted communication you can configure the Neo4j server to listen to a different port.
+Please see {some-handy-attribute-for-the-correct-page-in-the-manual} for information on how to do that.</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="websockets"><a class="anchor" href="#websockets"></a>Websockets</h3>
 <div class="paragraph">
-<p>Put a websocket in it, will ya</p>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="errors"><a class="anchor" href="#errors"></a>Errors</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Some things can go wrong.
-If that happens, null can be returned.
-Also, boolean can be returned false.
-There can also be FAILURE AKA ACK_FAILURE.</p>
-</div>
-<div class="listingblock">
-<div class="title">Example</div>
-<div class="content">
-<pre class="highlight"><code class="language-cypher" data-lang="cypher">MATCH (null)-[:merge]-&gt;(true)
-with null.delete as foreach, `true`.false as null
-return 2 + foreach, coalesce(null, 3.1415)
-limit 10;</code></pre>
-</div>
+<p>REMOVE</p>
 </div>
 <div class="paragraph">
-<p>With this query, you can get error, even when you have 100 heap.</p>
+<p>Accessed on the same port, since we&#8217;re multiplexing.
+Functionally speaking we have four different ways of connecting</p>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="getting-started"><a class="anchor" href="#getting-started"></a>Getting Started</h2>
-<div class="sectionbody">
 <div class="paragraph">
-<p>Ready, set, get, start!</p>
+<p>Standard TCP
+    plain
+    encrypted
+Websockets
+    plain
+    encrypted</p>
 </div>
-<div class="sect2">
-<h3 id="download"><a class="anchor" href="#download"></a>Download</h3>
 <div class="paragraph">
-<p>To dowload the driver do</p>
+<p>Same functionality.
+Tradeoff: plain sockets are faster (SSL ~20% slower) so useful if you are in a <em>safe environment</em>.</p>
 </div>
-<div class="exampleblock tabbed-example">
-<div class="title">Example 2. Foo bar example</div>
-<div class="content">
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-python" data-lang="python">pip install neo4j-driver</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-java" data-lang="java">&lt;dependencies&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.neo4j.driver&lt;/groupId&gt;
-        &lt;artifactId&gt;neo4j-java-driver&lt;/artifactId&gt;
-        &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
-    &lt;/dependency&gt;
-&lt;/dependencies&gt;
-
-&lt;repositories&gt;
-    &lt;repository&gt;
-        &lt;id&gt;neo4j-snapshot-repository&lt;/id&gt;
-        &lt;name&gt;Neo4j Maven 2 snapshot repository&lt;/name&gt;
-        &lt;url&gt;http://m2.neo4j.org/content/repositories/snapshots&lt;/url&gt;
-        &lt;snapshots&gt;
-            &lt;enabled&gt;true&lt;/enabled&gt;
-        &lt;/snapshots&gt;
-        &lt;releases&gt;
-            &lt;enabled&gt;false&lt;/enabled&gt;
-        &lt;/releases&gt;
-    &lt;/repository&gt;
-&lt;/repositories&gt;</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-javascript" data-lang="javascript">var neo4j = require('lib/neo4j');</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="setup"><a class="anchor" href="#setup"></a>Setup</h3>
 <div class="paragraph">
-<p>Yes, that&#8217;s a good idea.</p>
+<p>Standard TCP sockets vs Websockts
+default: Standard</p>
 </div>
-</div>
-<div class="sect2">
-<h3 id="versioning"><a class="anchor" href="#versioning"></a>Versioning</h3>
 <div class="paragraph">
-<p>Please see <a href="#version-mapping-table">the other section about this</a>.</p>
+<p>Websockets exist for enfironment where there is no standard socket library, (i.e. the browser).</p>
 </div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="results"><a class="anchor" href="#results"></a>Results</h2>
-<div class="sectionbody">
 <div class="paragraph">
-<p>Hopefully, if you do it right, you will get results.</p>
-</div>
-<div class="sect2">
-<h3 id="concepts"><a class="anchor" href="#concepts"></a>Concepts</h3>
-<div class="paragraph">
-<p>'Concept' comes from the latin <em>concipio</em>, meaning 'I grasp'.
-Thus the same latin root gives us <em>to conceive</em>, meaning that act of the intellect whereby the soul is formally identical with a material substance, 'grasping it' through or under a 'concept',
-and the biological act of generating a new human being in the womb.
-It is rather poetic that the embryo of a child of the mind and of a child of the body share an etymological ancestry.</p>
-</div>
-<div class="sect3">
-<h4 id="record-view"><a class="anchor" href="#record-view"></a>Record View</h4>
-<div class="paragraph">
-<p>View the records.</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="record-cursor"><a class="anchor" href="#record-cursor"></a>Record Cursor</h4>
-<div class="paragraph">
-<p>Curse the records.</p>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="introspection"><a class="anchor" href="#introspection"></a>Introspection</h3>
-<div class="paragraph">
-<p>Too deep for me, I&#8217;m afraid.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="iteration"><a class="anchor" href="#iteration"></a>Iteration</h3>
-<div class="paragraph">
-<p>Rinse, repeat.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="plan-and-profile"><a class="anchor" href="#plan-and-profile"></a>Plan + Profile</h3>
-<div class="paragraph">
-<p>You can profile your queries and get the execution plan returned.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="reading-records"><a class="anchor" href="#reading-records"></a>Reading Records</h3>
-<div class="paragraph">
-<p>Usually I listen to them, but ok.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="utility-methods"><a class="anchor" href="#utility-methods"></a>Utility Methods</h3>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-java" data-lang="java">class Ball extends Throwable {}
-
-class P {
-
-    P target;
-
-    P (P target) {
-        this.target = target;
-
-    }
-
-    void aim (Ball ball) {
-
-        try {
-            throw Ball;
-        }
-        catch (Ball b) {
-            target.aim (b);
-        }
-    }
-
-    public static void main (String[] args) {
-        P parent = new P (null);
-        P child = new P (parent);
-        parent.target = child;
-        parent.aim (new Ball ());
-    }
-}</code></pre>
-</div>
+<p>All drivers support TLS or Plain
+All drivers support one or the other of Standard/Websockets, not necessarily both.</p>
 </div>
 </div>
 </div>
@@ -1414,33 +1464,24 @@ class P {
 <h2 id="session"><a class="anchor" href="#session"></a>Session</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Therapy, we all need it.</p>
+<p>All interacting with the server happens in a session.</p>
 </div>
 <div class="sect2">
 <h3 id="monitoring"><a class="anchor" href="#monitoring"></a>Monitoring</h3>
-<div class="paragraph">
-<p>You can monitor the network traffic.
-Connect your screen to your modem with a RGB cable.</p>
-</div>
+
 </div>
 <div class="sect2">
 <h3 id="run-statement"><a class="anchor" href="#run-statement"></a>Run Statement</h3>
+<div class="paragraph">
+<p>TODO: This code example should be the first thing on the Session page.
+  Also, the heading is probably a waste.</p>
+</div>
 <div class="exampleblock tabbed-example">
-<div class="title">Example 3. Foo bar example</div>
+<div class="title">Example 5. Run statement</div>
 <div class="content">
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-python" data-lang="python">def test_can_run_simple_statement_with_params(self):
-    session = GraphDatabase.driver("bolt://localhost").session()
-    count = 0
-    for record in session.run("RETURN {x} AS n", {"x": {"abc": ["d", "e", "f"]}}):
-        assert record[0] == {"abc": ["d", "e", "f"]}
-        assert record["n"] == {"abc": ["d", "e", "f"]}
-        assert repr(record)
-        assert len(record) == 1
-        count += 1
-    session.close()
-    assert count == 1</code></pre>
+<pre class="highlight"><code class="language-cs" data-lang="cs">COMING SOON</code></pre>
 </div>
 </div>
 <div class="listingblock">
@@ -1470,23 +1511,53 @@ assertThat( statement.parameters(), equalTo( NO_PARAMETERS ) );</code></pre>
 });</code></pre>
 </div>
 </div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-python" data-lang="python">def test_can_run_simple_statement_with_params(self):
+    session = GraphDatabase.driver("bolt://localhost").session()
+    count = 0
+    for record in session.run("RETURN {x} AS n", {"x": {"abc": ["d", "e", "f"]}}):
+        assert record[0] == {"abc": ["d", "e", "f"]}
+        assert record["n"] == {"abc": ["d", "e", "f"]}
+        assert repr(record)
+        assert len(record) == 1
+        count += 1
+    session.close()
+    assert count == 1</code></pre>
+</div>
+</div>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="session-state"><a class="anchor" href="#session-state"></a>Session State</h3>
 <div class="paragraph">
-<p>One transaction, one result.
-We don&#8217;t do pay-it-forward.</p>
+<p>A session can be in three states:
+<em>READY</em>, <em>RESULT</em>, and <em>FAILED</em>.</p>
 </div>
 <div class="paragraph">
-<p>You can do parallell sessions, tho.</p>
+<p>A session begins in <em>READY</em> mode.
+When a query is executed, the session changes states.</p>
+</div>
+<div class="paragraph">
+<p>If execution is successful, the session enters <em>RESULT</em> state.
+The results are available for consumption.
+When the entire result stream is consumed, the session returns to <em>READY</em> state.</p>
+</div>
+<div class="paragraph">
+<p>If execution is not successful, the session enters <em>FAILED</em> state.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/bolt-session-state-machine.svg" alt="bolt session state machine">
+</div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="syncing"><a class="anchor" href="#syncing"></a>Syncing</h3>
 <div class="paragraph">
-<p>Pipelining is related to syncing.</p>
+<p>N/A
+Pipelining is related to syncing.</p>
 </div>
 </div>
 </div>
@@ -1494,65 +1565,274 @@ We don&#8217;t do pay-it-forward.</p>
 <div class="sect1">
 <h2 id="transactions"><a class="anchor" href="#transactions"></a>Transactions</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>Read about how transactions in general work in the <a href="http://neo4j.com/docs/stable/transactions.html">Neo4j Manual</a>.</p>
+</div>
 <div class="sect2">
 <h3 id="transactions-state"><a class="anchor" href="#transactions-state"></a>State</h3>
-<div class="imageblock">
-<div class="content">
-<img src="./images/bolt-state-machine.svg" alt="bolt state machine">
-</div>
-<div class="title">Figure 1. The state of the machine</div>
-</div>
+
 </div>
 <div class="sect2">
 <h3 id="transactions-implicit-transcation"><a class="anchor" href="#transactions-implicit-transcation"></a>Implicit Transcation</h3>
 <div class="paragraph">
-<p>If you transact you will be implicated.</p>
+<p>On <code>Session.run()</code> an implicit transaction is created.</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="transactions-begin-commit-rollback"><a class="anchor" href="#transactions-begin-commit-rollback"></a>BEGIN, COMMIT, ROLLBACK</h3>
-<div class="paragraph">
-<p>It&#8217;s what they shout at Daft Punk concerts.</p>
-</div>
+
 </div>
 <div class="sect2">
 <h3 id="transactions-nested-transactions"><a class="anchor" href="#transactions-nested-transactions"></a>Nested Transactions</h3>
 <div class="paragraph">
-<p>They are nice, but we don&#8217;t do them yet.
-We probably should tell you how to deal with that.</p>
+<p>COMING SOON</p>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="type-mapping"><a class="anchor" href="#type-mapping"></a>Type Mapping</h2>
+<h2 id="result"><a class="anchor" href="#result"></a>Result</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>Executing a statement returns a result.</p>
+</div>
+<div class="sect2">
+<h3 id="concepts"><a class="anchor" href="#concepts"></a>Concepts</h3>
+<div class="paragraph">
+<p>Every result is a stream of <a href="#term-record">records</a>.
+A record is an ordered map of keys and values.
+These ordered fields (key-value pairs) can be accessed
+  by position (integer) by key (string).</p>
+</div>
+<div class="sect3">
+<h4 id="record-view"><a class="anchor" href="#record-view"></a>Record View</h4>
+<div class="paragraph">
+<p>View the records.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="record-cursor"><a class="anchor" href="#record-cursor"></a>Record Cursor</h4>
+<div class="paragraph">
+<p>Curse the records.</p>
+</div>
+<div class="paragraph">
+<p>TODO: Value types?</p>
+</div>
+<div class="paragraph">
+<p>strings, numbers, nodes, relationships, paths</p>
+</div>
+<div class="paragraph">
+<p><a href="https://github.com/neo-technology/driver-compliance-kit/blob/08-results/08-results-synchronous.adoc" class="bare">https://github.com/neo-technology/driver-compliance-kit/blob/08-results/08-results-synchronous.adoc</a></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="processing"><a class="anchor" href="#processing"></a>Processing</h3>
+<div class="paragraph">
+<p>How to process results.</p>
+</div>
+<div class="exampleblock tabbed-example">
+<div class="title">Example 6. Processing results</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-cs" data-lang="cs">COMING SOON</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">String text = "MATCH (n) RETURN n";
+
+// when
+Statement statement = new Statement( text, NO_PARAMETERS );</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-javascript" data-lang="javascript">var neo4j = require('neo4j');
+
+var statement = ['MERGE (alice:Person {name:{name_a},age:{age_a}})',
+  'MERGE (bob:Person {name:{name_b},age:{age_b}})',
+  'CREATE UNIQUE (alice)-[alice_knows_bob:KNOWS]-&gt;(bob)',
+  'RETURN alice, bob, alice_knows_bob'
+];
+
+var params = {
+  name_a: 'Alice',
+  age_a: 33,
+  name_b: 'Bob',
+  age_b: 44
+};
+
+var driver = neo4j.driver("bolt://localhost");
+
+var streamSession = driver.session();
+var streamResult = streamSession.run(statement.join(' '), params);
+streamResult.subscribe({
+  onNext: function(record) {
+    // On receipt of RECORD
+    for(var i in record) {
+      console.log(i);
+      console.log(record[i]);
+    }
+  }, onCompleted: function() {
+    var summary = streamResult.summarize();
+    //Print number of nodes created
+    console.log('');
+    console.log(summary.updateStatistics.nodesCreated());
+    streamSession.close();
+  }, onError: function(error) {
+    console.log(error);
+  }
+});
+
+var promiseSession = driver.session();
+var promiseResult = promiseSession.run(statement.join(' '), params);
+promiseResult.then(function(records) {
+  records.forEach(function(record) {
+    for(var i in record) {
+      console.log(i);
+      console.log(record[i]);
+    }
+  });
+  var summary = promiseResult.summarize();
+  //Print number of nodes created
+  console.log('');
+  console.log(summary.updateStatistics.nodesCreated());
+})
+.catch(function(error) {
+  console.log(error);
+})
+.then(function(){
+  promiseSession.close();
+});</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-python" data-lang="python">def test_can_run_simple_statement_from_bytes_string(self):
+    session = GraphDatabase.driver("bolt://localhost").session()
+    count = 0
+    for record in session.run(b"RETURN 1 AS n"):
+        assert record[0] == 1
+        assert record["n"] == 1
+        assert record.n == 1
+        assert repr(record)</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="plan-and-profile"><a class="anchor" href="#plan-and-profile"></a>Plan + Profile</h3>
+<div class="paragraph">
+<p>Rename to "Metadata"?</p>
+</div>
+<div class="paragraph">
+<p>The result contains metadata.
+Describe it here.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="types"><a class="anchor" href="#types"></a>Types</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Neo4j Public Type System:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><em>string</em></p>
+</li>
+<li>
+<p><em>number</em></p>
+</li>
+<li>
+<p><em>boolean</em></p>
+</li>
+<li>
+<p><em>Node</em></p>
+</li>
+<li>
+<p><em>Relationship</em></p>
+</li>
+<li>
+<p><em>Path</em></p>
+</li>
+</ul>
+</div>
 <div class="exampleblock">
-<div class="title">Example 4. Type mapping between the Neo4j public type system and them other languages</div>
+<div class="title">Example 7. Language mapping example</div>
 <div class="content">
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-python" data-lang="python">What are types?</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-java" data-lang="java">Mmmmhhh..</code></pre>
+<pre class="highlight"><code class="language-cs" data-lang="cs">COMING SOON</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-javascript" data-lang="javascript">Just minify and lint it and you should be fine.</code></pre>
+<pre class="highlight"><code class="language-java" data-lang="java">COMING SOON</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-javascript" data-lang="javascript">COMING SOON</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-python" data-lang="python">COMING SOON</code></pre>
 </div>
 </div>
 </div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="errors"><a class="anchor" href="#errors"></a>Errors</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>COMING SOON</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="terminology"><a class="anchor" href="#terminology"></a>Terminology</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The terminology used in the Neo4j Driver manual.
+This section provides cross-linked summaries of common terms.</p>
+</div>
+<div class="paragraph">
+<p>In some cases, multiple terms (e.g., ) may be used for the same or similar concept.
+An asterisk (*) to the right of a term indicates that the term is commonly used for Neo4j and Cypher.</p>
+</div>
+<div class="dlist glossary">
+<dl>
+<dt><a id="term-bolt"></a>bolt</dt>
+<dd>
+<p>The protocol used by Neo4j drivers to communicate with the server.</p>
+</dd>
+<dt><a id="term-driver"></a>driver</dt>
+<dd>
+<p>An interface for operating the Neo4j database.
+The Neo4j drivers implement the <a href="#term-bolt">Bolt</a> protocol.</p>
+</dd>
+<dt><a id="term-record"></a>record</dt>
+<dd>
+<p><em>a result:</em> An ordered map of keys and values.
+A <a href="#term-driver">Neo4j driver</a> returns results as a strem of records.</p>
+</dd>
+</dl>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-11-30 08:08:07 CET
+Last updated 2015-11-30 20:59:13 CET
 </div>
 </div>
 </body>
