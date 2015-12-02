@@ -709,22 +709,6 @@ h2 { color: #325D72; border-bottom: 1px solid #dddddd; }
 
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
-<style>
-    .listingblock pre, .literalblock pre, .listingblock pre[class="highlight"], .listingblock pre[class^="highlight "], .listingblock pre.CodeRay, .listingblock pre.prettyprint {
-        background: #f9f9f9;
-        border: 1px solid #dddddd;;
-    }
-    #header, #content, #footnotes {
-        max-width: 800px;
-    }
-    html, body {
-        font-size: 16px;
-    }
-    #content ul.nav-tabs li {
-        background: none;
-        padding-left: 0;
-    }
-</style>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
@@ -870,6 +854,22 @@ $(document).ready(function() {
 });
 </script>
 
+<style>
+    .listingblock pre, .literalblock pre, .listingblock pre[class="highlight"], .listingblock pre[class^="highlight "], .listingblock pre.CodeRay, .listingblock pre.prettyprint {
+        background: #f9f9f9;
+        border: 1px solid #dddddd;;
+    }
+    #header, #content, #footnotes {
+        max-width: 800px;
+    }
+    html, body {
+        font-size: 16px;
+    }
+    #content ul.nav-tabs li {
+        background: none;
+        padding-left: 0;
+    }
+</style>
 </head>
 <body id="index" class="article toc2 toc-left">
 <div id="header">
@@ -888,33 +888,22 @@ $(document).ready(function() {
 <li><a href="#dependencies">Dependencies</a></li>
 <li><a href="#construction">Construction</a></li>
 <li><a href="#lifecycle">Lifecycle</a></li>
-<li><a href="#url-format">URL Format</a></li>
 <li><a href="#configuration">Configuration</a></li>
-<li><a href="#ssl-tls">SSL / TLS</a></li>
-<li><a href="#websockets">Websockets</a></li>
 </ul>
 </li>
 <li><a href="#session">Session</a>
 <ul class="sectlevel2">
-<li><a href="#monitoring">Monitoring</a></li>
 <li><a href="#run-statement">Run Statement</a></li>
 <li><a href="#session-state">Session State</a></li>
 <li><a href="#syncing">Syncing</a></li>
-</ul>
-</li>
-<li><a href="#transactions">Transactions</a>
-<ul class="sectlevel2">
-<li><a href="#transactions-state">State</a></li>
-<li><a href="#transactions-implicit-transcation">Implicit Transcation</a></li>
-<li><a href="#transactions-begin-commit-rollback">BEGIN, COMMIT, ROLLBACK</a></li>
-<li><a href="#transactions-nested-transactions">Nested Transactions</a></li>
+<li><a href="#transactions">Transactions</a></li>
 </ul>
 </li>
 <li><a href="#result">Result</a>
 <ul class="sectlevel2">
 <li><a href="#concepts">Concepts</a></li>
 <li><a href="#processing">Processing</a></li>
-<li><a href="#plan-and-profile">Plan + Profile</a></li>
+<li><a href="#metadata">Metadata</a></li>
 </ul>
 </li>
 <li><a href="#types">Types</a></li>
@@ -1145,31 +1134,9 @@ See the <a href="#transactions">transaction section</a> for details.</p>
 <div class="sect1">
 <h2 id="driver"><a class="anchor" href="#driver"></a>Driver</h2>
 <div class="sectionbody">
-<div class="admonitionblock caution">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-caution" title="Caution"></i>
-</td>
-<td class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>remove 'your'</p>
-</li>
-<li>
-<p>don&#8217;t talk about code here, this is conceptual</p>
-</li>
-</ul>
-</div>
-</td>
-</tr>
-</table>
-</div>
 <div class="paragraph">
-<p>The <code>Driver</code> is your primary object of interest.
-It usually lives for the duration of your application,
-  and from it you create <code>Session</code> to use for executing statements on the database.</p>
+<p>A driver usually lives for the duration of an application.
+It controls communication with the Neo4j server and spawns sessions.</p>
 </div>
 <div class="sect2">
 <h3 id="dependencies"><a class="anchor" href="#dependencies"></a>Dependencies</h3>
@@ -1393,69 +1360,46 @@ promiseResult.then(function(records) {
 <div class="sect2">
 <h3 id="lifecycle"><a class="anchor" href="#lifecycle"></a>Lifecycle</h3>
 <div class="paragraph">
-<p>A <code>Driver</code> object can be created from your database object.
+<p>A driver is created from the database object.
 It typically lives for the duration of your application.
-Use a <code>Driver</code> to create `Session`s.</p>
+Use a driver to create sessions.</p>
 </div>
 <div class="paragraph">
 <p>The only reason to create more than one driver would be
-  if you have multiple destinations/URLs to create sessions for.
-(For HA purposes, or pulling data out of one database and pushing into another.)</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="url-format"><a class="anchor" href="#url-format"></a>URL Format</h3>
-<div class="paragraph">
-<p>The URL for a Bolt Driver follows normal URL patterns, with <code>scheme://hostname</code>.
-The scheme is <code>bolt</code>, so a valid URL could be <code>bolt://host.domain</code>.</p>
+  if there are multiple destinations/URLs for which to create sessions.
+(For HA purposes, or to pull data out of one database and push it into another.)</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="configuration"><a class="anchor" href="#configuration"></a>Configuration</h3>
 <div class="paragraph">
-<p>(N/A, how to configure your Driver based on your server configuration.)</p>
+<p>The only configuration necessery to use a driver is a Bolt URL.</p>
+</div>
+<div class="sect3">
+<h4 id="url-format"><a class="anchor" href="#url-format"></a>URL Format</h4>
+<div class="paragraph">
+<p>The Bolt URL follows the standard URL pattern of <code>scheme://hostname:port</code>.
+The point of configuration is contained in the scheme.
+The simplest Bolt URL uses <code>bolt</code> for schema on the default Neo4j port:
+<code>bolt://localhost:7474</code>.</p>
+</div>
+<div class="paragraph">
+<p>To connect to Neo4j on a different port,
+  to disable default security,
+  or to manually control the use of a Websocket,
+  the server must be configured.
+The driver is then configured to connect to the server in the desired way by altering the URL.
+<code>bolt+ssl://server:1234</code></p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="ssl-tls"><a class="anchor" href="#ssl-tls"></a>SSL / TLS</h3>
+<div class="sect3">
+<h4 id="ssl-tls"><a class="anchor" href="#ssl-tls"></a>SSL / TLS</h4>
 <div class="paragraph">
 <p>Traffic using the Uniform Language Drivers is encrypted by default,
   using SSL/TLS.
 If you want unencrpyted communication you can configure the Neo4j server to listen to a different port.
 Please see {some-handy-attribute-for-the-correct-page-in-the-manual} for information on how to do that.</p>
 </div>
-</div>
-<div class="sect2">
-<h3 id="websockets"><a class="anchor" href="#websockets"></a>Websockets</h3>
-<div class="paragraph">
-<p>REMOVE</p>
-</div>
-<div class="paragraph">
-<p>Accessed on the same port, since we&#8217;re multiplexing.
-Functionally speaking we have four different ways of connecting</p>
-</div>
-<div class="paragraph">
-<p>Standard TCP
-    plain
-    encrypted
-Websockets
-    plain
-    encrypted</p>
-</div>
-<div class="paragraph">
-<p>Same functionality.
-Tradeoff: plain sockets are faster (SSL ~20% slower) so useful if you are in a <em>safe environment</em>.</p>
-</div>
-<div class="paragraph">
-<p>Standard TCP sockets vs Websockts
-default: Standard</p>
-</div>
-<div class="paragraph">
-<p>Websockets exist for enfironment where there is no standard socket library, (i.e. the browser).</p>
-</div>
-<div class="paragraph">
-<p>All drivers support TLS or Plain
-All drivers support one or the other of Standard/Websockets, not necessarily both.</p>
 </div>
 </div>
 </div>
@@ -1467,14 +1411,9 @@ All drivers support one or the other of Standard/Websockets, not necessarily bot
 <p>All interacting with the server happens in a session.</p>
 </div>
 <div class="sect2">
-<h3 id="monitoring"><a class="anchor" href="#monitoring"></a>Monitoring</h3>
-
-</div>
-<div class="sect2">
 <h3 id="run-statement"><a class="anchor" href="#run-statement"></a>Run Statement</h3>
 <div class="paragraph">
-<p>TODO: This code example should be the first thing on the Session page.
-  Also, the heading is probably a waste.</p>
+<p>When the session runs a statement directly, it creates an implicit transaction.</p>
 </div>
 <div class="exampleblock tabbed-example">
 <div class="title">Example 5. Run statement</div>
@@ -1560,32 +1499,16 @@ When the entire result stream is consumed, the session returns to <em>READY</em>
 Pipelining is related to syncing.</p>
 </div>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="transactions"><a class="anchor" href="#transactions"></a>Transactions</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="transactions"><a class="anchor" href="#transactions"></a>Transactions</h3>
 <div class="paragraph">
 <p>Read about how transactions in general work in the <a href="http://neo4j.com/docs/stable/transactions.html">Neo4j Manual</a>.</p>
 </div>
-<div class="sect2">
-<h3 id="transactions-state"><a class="anchor" href="#transactions-state"></a>State</h3>
-
-</div>
-<div class="sect2">
-<h3 id="transactions-implicit-transcation"><a class="anchor" href="#transactions-implicit-transcation"></a>Implicit Transcation</h3>
 <div class="paragraph">
-<p>On <code>Session.run()</code> an implicit transaction is created.</p>
+<p>When the session runs a statement directly, it creates an implicit transaction.</p>
 </div>
-</div>
-<div class="sect2">
-<h3 id="transactions-begin-commit-rollback"><a class="anchor" href="#transactions-begin-commit-rollback"></a>BEGIN, COMMIT, ROLLBACK</h3>
-
-</div>
-<div class="sect2">
-<h3 id="transactions-nested-transactions"><a class="anchor" href="#transactions-nested-transactions"></a>Nested Transactions</h3>
 <div class="paragraph">
-<p>COMING SOON</p>
+<p>The transaction object can be controlled with <code>BEGIN</code>, <code>COMMIT</code>, and <code>ROLLBACK</code>.</p>
 </div>
 </div>
 </div>
@@ -1601,25 +1524,97 @@ Pipelining is related to syncing.</p>
 <div class="paragraph">
 <p>Every result is a stream of <a href="#term-record">records</a>.
 A record is an ordered map of keys and values.
-These ordered fields (key-value pairs) can be accessed
-  by position (integer) by key (string).</p>
+These key-value pairs are called "fields".
+Because the fields are both keyed and ordered,
+  the value of a field can be accessed either by position (<em>0-based integer</em>) or by key (<em>string</em>).</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>To access values by position, use a 0-based integer.
+To access values by key, use a string.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Views and cursors are the primary way of accessing results.</p>
 </div>
 <div class="sect3">
 <h4 id="record-view"><a class="anchor" href="#record-view"></a>Record View</h4>
 <div class="paragraph">
-<p>View the records.</p>
+<p>The record view provides access to the individual result record.</p>
+</div>
+<div class="exampleblock tabbed-example">
+<div class="title">Example 6. Record view example</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-cs" data-lang="cs">COMING SOON</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">RecordView r = ...;
+for (String key : r.keys())
+{
+    System.out.println(key + ": " + r.value(key));
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-javascript" data-lang="javascript">COMING SOON</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-python" data-lang="python">COMING SOON</code></pre>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="sect3">
 <h4 id="record-cursor"><a class="anchor" href="#record-cursor"></a>Record Cursor</h4>
 <div class="paragraph">
-<p>Curse the records.</p>
+<p>A record cursor provides access to the record stream.
+It is a record view with a dynamically changing underlying record.</p>
 </div>
-<div class="paragraph">
-<p>TODO: Value types?</p>
+<div class="exampleblock tabbed-example">
+<div class="title">Example 7. Record cursor example</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-cs" data-lang="cs">COMING SOON</code></pre>
 </div>
-<div class="paragraph">
-<p>strings, numbers, nodes, relationships, paths</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">RecordView r = ...;
+for (String key : r.keys())
+{
+    System.out.println(key + ": " + r.value(key));
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-javascript" data-lang="javascript">COMING SOON</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-python" data-lang="python">COMING SOON</code></pre>
+</div>
+</div>
+</div>
 </div>
 <div class="paragraph">
 <p><a href="https://github.com/neo-technology/driver-compliance-kit/blob/08-results/08-results-synchronous.adoc" class="bare">https://github.com/neo-technology/driver-compliance-kit/blob/08-results/08-results-synchronous.adoc</a></p>
@@ -1631,8 +1626,22 @@ These ordered fields (key-value pairs) can be accessed
 <div class="paragraph">
 <p>How to process results.</p>
 </div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Now that we have examples for record views and cursors, what is left for "processing results" that can go in this section?</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
 <div class="exampleblock tabbed-example">
-<div class="title">Example 6. Processing results</div>
+<div class="title">Example 8. Processing results</div>
 <div class="content">
 <div class="listingblock">
 <div class="content">
@@ -1724,13 +1733,10 @@ promiseResult.then(function(records) {
 </div>
 </div>
 <div class="sect2">
-<h3 id="plan-and-profile"><a class="anchor" href="#plan-and-profile"></a>Plan + Profile</h3>
+<h3 id="metadata"><a class="anchor" href="#metadata"></a>Metadata</h3>
 <div class="paragraph">
-<p>Rename to "Metadata"?</p>
-</div>
-<div class="paragraph">
-<p>The result contains metadata.
-Describe it here.</p>
+<p>It is possible to retrieve metadata along with the result stream.
+An example is the query plan obtained by prepending a <code>PROFILE</code> or <code>EXPLAIN</code> keyword to the Cypher query.</p>
 </div>
 </div>
 </div>
@@ -1764,7 +1770,7 @@ Describe it here.</p>
 </ul>
 </div>
 <div class="exampleblock">
-<div class="title">Example 7. Language mapping example</div>
+<div class="title">Example 9. Language mapping example</div>
 <div class="content">
 <div class="listingblock">
 <div class="content">
@@ -1832,7 +1838,7 @@ A <a href="#term-driver">Neo4j driver</a> returns results as a strem of records.
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-11-30 20:59:13 CET
+Last updated 2015-12-01 13:33:50 CET
 </div>
 </div>
 </body>
